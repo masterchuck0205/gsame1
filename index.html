@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger Boys — Home of the Free Fries | Church Lane, Melbourne CBD</title>
+<meta name="description" content="Burger Boys — Black Angus smashed classics, twice-fried chicken and free fries, tucked inside Saving Grace on Church Lane, Melbourne CBD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Bungee&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF3DE;
+    --paper:#FFFBF2;
+    --ink:#271B10;
+    --blue:#1C5AA0;
+    --blue-dark:#0F3C72;
+    --red:#E24E2A;
+    --red-dark:#B93A1C;
+    --yellow:#F6C23F;
+    --green:#5C7A3C;
+    --line:rgba(39,27,16,0.14);
+    --radius:14px;
+    --shadow:6px 6px 0 var(--ink);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3{margin:0;font-family:'Bungee',cursive;line-height:1.05;letter-spacing:0.5px;}
+  .script{font-family:'Kaushan Script',cursive;font-weight:400;}
+  .mono{font-family:'Space Mono',monospace;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;}
+
+  /* ---------- checkerboard ---------- */
+  .checker{
+    height:14px;
+    background-image:
+      linear-gradient(45deg, var(--blue) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--blue) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--blue) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--blue) 75%);
+    background-size:14px 14px;
+    background-position:0 0, 0 7px, 7px -7px, -7px 0px;
+    background-color:var(--paper);
+  }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Bungee',cursive;font-size:0.8rem;letter-spacing:0.5px;
+    padding:14px 22px;border-radius:999px;
+    border:2.5px solid var(--ink);
+    text-decoration:none;
+    box-shadow:4px 4px 0 var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+  .btn:active{transform:translate(0,0);box-shadow:2px 2px 0 var(--ink);}
+  .btn-red{background:var(--red);color:var(--paper);}
+  .btn-yellow{background:var(--yellow);color:var(--ink);}
+  .btn-outline{background:var(--paper);color:var(--ink);}
+  .btn-blue{background:var(--blue);color:var(--paper);}
+
+  /* ---------- nav ---------- */
+  header{position:sticky;top:0;z-index:50;}
+  .navbar{
+    background:var(--paper);
+    border-bottom:3px solid var(--ink);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 24px;max-width:1160px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);}
+  .brand span{font-size:1.5rem;color:var(--blue);}
+  .nav-links{display:flex;align-items:center;gap:26px;list-style:none;margin:0;padding:0;}
+  .nav-links a{
+    text-decoration:none;font-weight:700;font-size:0.82rem;letter-spacing:1px;text-transform:uppercase;
+    color:var(--ink);padding-bottom:3px;border-bottom:2px solid transparent;
+  }
+  .nav-links a:hover{border-bottom-color:var(--red);}
+  .nav-cta{display:flex;gap:10px;}
+  .nav-toggle{display:none;background:none;border:2px solid var(--ink);border-radius:8px;padding:8px 10px;cursor:pointer;}
+  .nav-toggle span{display:block;width:22px;height:3px;background:var(--ink);margin:4px 0;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(var(--line) 1.4px, transparent 1.4px);
+    background-size:22px 22px;
+    padding:70px 0 40px;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
+    padding:7px 14px;border-radius:999px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"●";color:var(--yellow);}
+  .hero h1{font-size:clamp(2.6rem,5.4vw,4.3rem);color:var(--ink);}
+  .hero h1 .script{
+    display:block;color:var(--blue);font-size:0.5em;margin-bottom:2px;
+  }
+  .hero h1 .pop{color:var(--red);-webkit-text-stroke:2px var(--ink);text-stroke:2px var(--ink);}
+  .hero p.lede{max-width:480px;margin:22px 0 30px;font-size:1.08rem;color:#42351f;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;}
+  .hero-art{position:relative;display:flex;justify-content:center;}
+  .hero-art svg{width:100%;max-width:420px;filter:drop-shadow(10px 14px 0 rgba(39,27,16,0.16));animation:float 5s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(-1deg);}}
+  .ribbon-pin{
+    position:absolute;top:-6px;right:6px;
+    background:var(--yellow);border:2.5px solid var(--ink);
+    padding:9px 16px;border-radius:8px;transform:rotate(8deg);
+    font-family:'Bungee',cursive;font-size:0.7rem;box-shadow:4px 4px 0 var(--ink);
+  }
+
+  /* ---------- marquee ---------- */
+  .marquee-strip{background:var(--red);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);overflow:hidden;padding:12px 0;}
+  .marquee{display:flex;width:max-content;animation:scroll 26s linear infinite;}
+  .marquee span{
+    font-family:'Bungee',cursive;color:var(--yellow);font-size:0.95rem;letter-spacing:1px;
+    padding:0 26px;white-space:nowrap;
+  }
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- section heading ---------- */
+  .section{padding:78px 0;}
+  .section-head{max-width:640px;margin:0 0 44px;}
+  .kicker{
+    font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:2px;
+    font-size:0.78rem;color:var(--blue);font-weight:700;display:block;margin-bottom:10px;
+  }
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);color:var(--ink);}
+  .section-head h2 em{font-style:normal;color:var(--red);}
+  .section-head p{margin-top:14px;max-width:520px;color:#4a3b23;}
+
+  /* ---------- story ---------- */
+  .story{background:var(--paper);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;}
+  .story p{color:#3d2f1a;max-width:480px;}
+  .story p + p{margin-top:14px;}
+  .stub-list{display:flex;flex-direction:column;gap:14px;}
+  .stub{
+    display:flex;justify-content:space-between;gap:16px;align-items:center;
+    background:var(--cream);border:2px dashed var(--ink);border-radius:10px;padding:16px 18px;
+  }
+  .stub b{font-family:'Bungee',cursive;font-size:0.95rem;color:var(--blue-dark);}
+  .stub span{font-family:'Space Mono',monospace;font-size:0.8rem;color:#5a4a2c;text-align:right;}
+
+  /* ---------- menu ---------- */
+  .menu{background:var(--cream);}
+  .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:38px;}
+  .tab{
+    font-family:'Bungee',cursive;font-size:0.74rem;letter-spacing:0.5px;
+    padding:11px 18px;border-radius:999px;border:2.5px solid var(--ink);
+    background:var(--paper);cursor:pointer;color:var(--ink);
+  }
+  .tab[aria-selected="true"]{background:var(--blue);color:var(--paper);box-shadow:3px 3px 0 var(--ink);}
+  .menu-panel{display:none;}
+  .menu-panel.active{display:block;}
+  .menu-note{
+    font-family:'Space Mono',monospace;font-size:0.82rem;color:#5a4a2c;
+    background:var(--yellow);border:2px solid var(--ink);border-radius:10px;
+    padding:10px 16px;display:inline-block;margin-bottom:28px;
+  }
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 28px;}
+  .ticket{
+    position:relative;background:var(--paper);border:2.5px solid var(--ink);border-radius:10px;
+    padding:24px 22px 20px;
+  }
+  .ticket::before,.ticket::after{
+    content:'';position:absolute;top:50%;transform:translateY(-50%);
+    width:20px;height:20px;border-radius:50%;background:var(--cream);border:2.5px solid var(--ink);
+  }
+  .ticket::before{left:-12px;}
+  .ticket::after{right:-12px;}
+  .ticket-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+  .ticket h3{font-size:1.05rem;color:var(--blue-dark);}
+  .stamp{
+    font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:1px;text-transform:uppercase;
+    color:var(--red-dark);border:2px solid var(--red-dark);border-radius:6px;padding:3px 7px;
+    transform:rotate(-6deg);white-space:nowrap;flex-shrink:0;
+  }
+  .ticket p{margin:0;font-size:0.92rem;color:#4a3b23;}
+  .ticket .tag{
+    display:inline-block;margin-top:12px;font-family:'Space Mono',monospace;font-size:0.72rem;
+    color:var(--green);
+  }
+  .wings-note{margin-top:6px;font-family:'Space Mono',monospace;font-size:0.78rem;color:#5a4a2c;}
+
+  .extras-wrap{margin-top:56px;padding-top:44px;border-top:3px dashed var(--line);}
+  .extras-title{font-family:'Bungee',cursive;font-size:1.1rem;color:var(--red-dark);margin-bottom:16px;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    font-family:'Space Mono',monospace;font-size:0.8rem;background:var(--paper);
+    border:2px solid var(--ink);border-radius:999px;padding:8px 16px;
+  }
+
+  /* ---------- find us ---------- */
+  .findus{background:var(--blue-dark);color:var(--paper);border-top:3px solid var(--ink);}
+  .findus .kicker{color:var(--yellow);}
+  .findus-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:stretch;}
+  .findus h2{color:var(--paper);}
+  .info-block{
+    background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.25);
+    border-radius:var(--radius);padding:28px;
+  }
+  .info-row{display:flex;gap:14px;margin-bottom:20px;}
+  .info-row:last-child{margin-bottom:0;}
+  .info-row .ico{
+    width:38px;height:38px;flex-shrink:0;border-radius:50%;background:var(--yellow);
+    display:flex;align-items:center;justify-content:center;color:var(--ink);font-family:'Bungee',cursive;font-size:0.9rem;
+  }
+  .info-row h4{font-family:'Bungee',cursive;font-size:0.9rem;margin:0 0 6px;color:var(--yellow);}
+  .info-row p{margin:0;font-family:'Space Mono',monospace;font-size:0.88rem;color:#e9ecf5;line-height:1.7;}
+  .findus-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;}
+  .map-frame{border-radius:var(--radius);overflow:hidden;border:2.5px solid var(--ink);min-height:280px;}
+  .map-frame iframe{width:100%;height:100%;min-height:280px;border:0;display:block;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--paper);padding:44px 0 30px;}
+  .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:26px;align-items:center;}
+  .foot-brand{display:flex;align-items:center;gap:10px;}
+  .foot-brand span{font-family:'Kaushan Script',cursive;font-size:1.3rem;color:var(--blue);}
+  .foot-social{display:flex;gap:12px;}
+  .foot-social a{
+    width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;text-decoration:none;
+  }
+  .foot-fine{font-family:'Space Mono',monospace;font-size:0.75rem;color:#6b5a3c;text-align:center;margin-top:30px;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-art{order:-1;max-width:280px;margin:0 auto;}
+    .story-grid,.findus-grid{grid-template-columns:1fr;}
+    .nav-links,.nav-cta{display:none;}
+    .nav-toggle{display:block;}
+    body.nav-open .nav-links{
+      display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+      background:var(--paper);border-bottom:3px solid var(--ink);padding:18px 24px;gap:16px;
+    }
+    body.nav-open .nav-cta{display:flex;position:absolute;top:calc(100% + 168px);left:24px;}
+  }
+  @media (max-width:560px){
+    .section{padding:56px 0;}
+    .hero{padding:46px 0 30px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Burger Boys home">
+        <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#F6C23F" stroke="#271B10" stroke-width="3"/><path d="M14 30c0-11 8-18 18-18s18 7 18 18" fill="#E7A860" stroke="#271B10" stroke-width="3"/><rect x="12" y="30" width="40" height="6" rx="3" fill="#F6C23F" stroke="#271B10" stroke-width="2.5"/><path d="M12 38c6 6 34 6 40 0" fill="none" stroke="#271B10" stroke-width="3" stroke-linecap="round"/></svg>
+        <span class="script">Burger Boys</span>
+      </a>
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#story">Story</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#findus">Find Us</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-outline" href="https://www.opentable.com.au/r/saving-grace-reservations-melbourne?restref=165161&lang=en-AU&ot_source=Restaurant%20website" target="_blank" rel="noopener">Book a Table</a>
+        <a class="btn btn-red" href="https://www.ubereats.com/en-GB/melbourne/food-delivery/burger-boys/u71smH7MRB6NmembfqifAw/" target="_blank" rel="noopener">Order Online</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinksMobile" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="checker" aria-hidden="true"></div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Church Lane · Melbourne CBD</span>
+        <h1><span class="script">Home of the</span><span class="pop">FREE FRIES</span></h1>
+        <p class="lede">Black Angus smash burgers, twice-fried buttermilk chicken and hand-cut fries with every basket — tucked inside Saving Grace on Church Lane, ready whenever you are.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-red" href="https://www.ubereats.com/en-GB/melbourne/food-delivery/burger-boys/u71smH7MRB6NmembfqifAw/" target="_blank" rel="noopener">Order Online →</a>
+          <a class="btn btn-yellow" href="#menu">See the Menu</a>
+          <a class="btn btn-outline" href="https://www.opentable.com.au/r/saving-grace-reservations-melbourne?restref=165161&lang=en-AU&ot_source=Restaurant%20website" target="_blank" rel="noopener">Book a Table</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="ribbon-pin">Est. in a<br>laneway</div>
+        <svg viewBox="0 0 300 260" aria-label="Illustration of a Burger Boys cheeseburger">
+          <ellipse cx="150" cy="230" rx="118" ry="20" fill="#00000012"/>
+          <path d="M40 210c0-14 8-22 22-22h176c14 0 22 8 22 22 0 12-10 20-22 20H62c-12 0-22-8-22-20z" fill="#D97A2E" stroke="#271B10" stroke-width="4"/>
+          <path d="M46 190h208v8c0 5-4 9-9 9H55c-5 0-9-4-9-9v-8z" fill="#F3D24A" stroke="#271B10" stroke-width="3"/>
+          <path d="M50 178c30 14 170 14 200 0l-8 14c-30 12-154 12-184 0z" fill="#3F7D3A" stroke="#271B10" stroke-width="3"/>
+          <rect x="44" y="150" width="212" height="30" rx="8" fill="#7A4A22" stroke="#271B10" stroke-width="4"/>
+          <path d="M48 150c0-18 12-28 28-28h148c16 0 28 10 28 28" fill="#EFAD4E" stroke="#271B10" stroke-width="4"/>
+          <path d="M42 150c50 16 166 16 216 0" fill="none" stroke="#271B10" stroke-width="3" opacity="0"/>
+          <path d="M60 118c8-40 40-64 90-64s82 24 90 64" fill="#F0B25A" stroke="#271B10" stroke-width="4"/>
+          <g fill="#FFF6E0" stroke="#271B10" stroke-width="1.5">
+            <ellipse cx="118" cy="86" rx="5" ry="8" transform="rotate(-20 118 86)"/>
+            <ellipse cx="140" cy="72" rx="5" ry="8" transform="rotate(-8 140 72)"/>
+            <ellipse cx="165" cy="70" rx="5" ry="8" transform="rotate(8 165 70)"/>
+            <ellipse cx="188" cy="80" rx="5" ry="8" transform="rotate(20 188 80)"/>
+            <ellipse cx="150" cy="94" rx="5" ry="8"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-strip">
+    <div class="marquee" aria-hidden="true">
+      <span>★ BLACK ANGUS BEEF</span><span>★ TWICE-FRIED CHICKEN</span><span>★ FREE FRIES, EVERY BASKET</span><span>★ HOUSE-MADE PICKLES</span>
+      <span>★ BLACK ANGUS BEEF</span><span>★ TWICE-FRIED CHICKEN</span><span>★ FREE FRIES, EVERY BASKET</span><span>★ HOUSE-MADE PICKLES</span>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="story section" id="story">
+    <div class="wrap story-grid">
+      <div class="reveal">
+        <span class="kicker">The short version</span>
+        <h2>Burgers in a bar, <em>fries on the house.</em></h2>
+        <p>Burger Boys lives inside Saving Grace, a laneway bar on Church Lane in the Melbourne CBD. Order at the counter, grab a stool, and we'll bring the basket over — patties smashed to order, chicken twice-fried for the crunch, and a side of fries that's never on the bill.</p>
+        <p>Everything's made in-house: the pickles, the bourbon BBQ, the spiced garlic mayo, Grace's own secret sauce. Beef is Black Angus, chicken is buttermilk-brined, and the vegan and mushroom builds get the same treatment as everything else on the pass.</p>
+      </div>
+      <div class="stub-list reveal">
+        <div class="stub"><b>Where</b><span>32 Church Lane<br>Melbourne CBD</span></div>
+        <div class="stub"><b>What's free</b><span>The fries.<br>Every single basket.</span></div>
+        <div class="stub"><b>House sauce</b><span>Grace's secret sauce —<br>ask, we won't tell</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu section" id="menu">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="kicker">The Menu</span>
+        <h2>Order at the counter, <em>we'll bring it over.</em></h2>
+        <p>Prices are on the board in-store and on UberEats — the line-up below is exactly what's in the basket.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Menu categories">
+        <button class="tab" role="tab" aria-selected="true" data-panel="burgers">Burgers</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="chicken">Crispy &amp; Glazed</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="sides">Sides &amp; Salad</button>
+        <button class="tab" role="tab" aria-selected="false" data-panel="extras">Make It Yours</button>
+      </div>
+
+      <!-- BURGERS -->
+      <div class="menu-panel active" id="panel-burgers">
+        <div class="card-grid">
+          <article class="ticket"><div class="ticket-top"><h3>Classic</h3><span class="stamp">House Fave</span></div><p>Black Angus beef patty, American cheese, smoked bacon, lettuce, tomato, red onion, mustard, ketchup &amp; mayo — side of house-made pickles.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Rushmore</h3><span class="stamp">House Fave</span></div><p>Black Angus beef patty, American cheese, smoked bacon, onion rings &amp; house-made smokey bourbon BBQ sauce.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Grace's Cheeseburger</h3></div><p>Black Angus beef patty, American cheese, ketchup, mustard, onion &amp; house-made pickles.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Grace's Cheeseburger Royale</h3></div><p>Black Angus beef patty, American cheese, Grace's secret sauce, lettuce &amp; house-made pickles.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Kentucky</h3></div><p>Buttermilk fried chicken, spiced garlic mayo, house-made pickles, lettuce &amp; American cheese.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Nashville</h3><span class="stamp">Spicy</span></div><p>Buttermilk fried chicken coated in Nashville-style seasoning, pickles, house-made ranch &amp; lettuce.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Crispy Mushroom</h3><span class="tag">Vegetarian</span></div><p>Panko-crumbed mushroom, Grace's secret sauce, lettuce, American cheese &amp; house-made pickles.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>The Vegan Burger</h3><span class="tag">Vegan</span></div><p>Plant-based patty, vegan cheese, Grace's secret vegan sauce, house-made pickles &amp; lettuce.</p></article>
+        </div>
+      </div>
+
+      <!-- CHICKEN / WINGS -->
+      <div class="menu-panel" id="panel-chicken">
+        <p class="menu-note">Wings come 6 or 12 — add a dipping sauce for $2</p>
+        <div class="card-grid">
+          <article class="ticket"><div class="ticket-top"><h3>Crispy. Glazed.</h3></div><p>Buttermilk chicken, twice-fried and seasoned in our secret spice blend.</p><span class="wings-note">6 or 12 wings</span></article>
+          <article class="ticket"><div class="ticket-top"><h3>Hot Glazed Wings</h3><span class="stamp">Spicy</span></div><p>Choose your heat: Red Hot, Buffalo, Sticky BBQ or Peri Peri.</p><span class="wings-note">6 or 12 wings</span></article>
+          <article class="ticket"><div class="ticket-top"><h3>Popcorn Chicken</h3></div><p>Served with a side of sliced pickles &amp; house-made ranch.</p></article>
+        </div>
+      </div>
+
+      <!-- SIDES / SALAD -->
+      <div class="menu-panel" id="panel-sides">
+        <div class="card-grid">
+          <article class="ticket"><div class="ticket-top"><h3>Fries</h3><span class="tag">Free w/ basket</span></div><p>Seasoned with sea salt &amp; secret spices, served with a side of chipotle ketchup.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Sweet Potato Fries</h3></div><p>Seasoned with sea salt, served with house-made spiced garlic mayo.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Onion Rings</h3></div><p>Seasoned with sea salt, served with house-made smokey bourbon BBQ sauce.</p></article>
+          <article class="ticket"><div class="ticket-top"><h3>Grilled Chicken Salad</h3></div><p>Grilled chicken, mixed leaves, walnuts, cranberry &amp; feta.</p></article>
+        </div>
+      </div>
+
+      <!-- EXTRAS -->
+      <div class="menu-panel" id="panel-extras">
+        <div class="section-head" style="margin-bottom:20px;">
+          <p>Every burger and basket, your way.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Make it a double</span>
+          <span class="chip">Extra cheese</span>
+          <span class="chip">Extra side pickles</span>
+          <span class="chip">Extra bacon</span>
+          <span class="chip">Swap for onion rings</span>
+          <span class="chip">Swap for sweet potato fries</span>
+          <span class="chip">Gluten free bun</span>
+        </div>
+      </div>
+
+      <div class="extras-wrap reveal">
+        <div class="extras-title">A note on the fries</div>
+        <p style="max-width:520px;color:#4a3b23;">Every burger basket comes with a side of fries, on the house — that's the deal, that's the name. Feel free to upgrade to sweet potato fries or onion rings for a small swap.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIND US -->
+  <section class="findus section" id="findus">
+    <div class="wrap findus-grid">
+      <div class="reveal">
+        <span class="kicker">Find Us</span>
+        <h2>Inside Saving Grace,<br>Church Lane.</h2>
+        <div class="info-block" style="margin-top:26px;">
+          <div class="info-row">
+            <div class="ico">📍</div>
+            <div><h4>Address</h4><p>32 Church Lane<br>Melbourne CBD, VIC</p></div>
+          </div>
+          <div class="info-row">
+            <div class="ico">🕒</div>
+            <div><h4>Hours</h4><p>Mon – Fri: 12:00pm til late<br>Saturday: 12:00pm til late<br>Sunday: Closed</p></div>
+          </div>
+        </div>
+        <div class="findus-ctas">
+          <a class="btn btn-red" href="https://www.ubereats.com/en-GB/melbourne/food-delivery/burger-boys/u71smH7MRB6NmembfqifAw/" target="_blank" rel="noopener">Order Online</a>
+          <a class="btn btn-yellow" href="https://www.opentable.com.au/r/saving-grace-reservations-melbourne?restref=165161&lang=en-AU&ot_source=Restaurant%20website" target="_blank" rel="noopener">Book a Table</a>
+        </div>
+      </div>
+      <div class="map-frame reveal">
+        <iframe title="Map showing 32 Church Lane, Melbourne CBD" loading="lazy" src="https://www.google.com/maps?q=32+Church+Lane+Melbourne+VIC&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="checker" aria-hidden="true"></div>
+<footer>
+  <div class="wrap footer-inner">
+    <div class="foot-brand">
+      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#F6C23F" stroke="#271B10" stroke-width="3"/><path d="M14 30c0-11 8-18 18-18s18 7 18 18" fill="#E7A860" stroke="#271B10" stroke-width="3"/><rect x="12" y="30" width="40" height="6" rx="3" fill="#F6C23F" stroke="#271B10" stroke-width="2.5"/><path d="M12 38c6 6 34 6 40 0" fill="none" stroke="#271B10" stroke-width="3" stroke-linecap="round"/></svg>
+      <span>Burger Boys</span>
+    </div>
+    <div class="foot-social">
+      <a href="http://instagram.com/burgerboysmelbourne" target="_blank" rel="noopener" aria-label="Burger Boys on Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#271B10" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="http://facebook.com/burgerboysmelbourne" target="_blank" rel="noopener" aria-label="Burger Boys on Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#271B10" stroke-width="2"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+    </div>
+  </div>
+  <p class="foot-fine">© <span id="year"></span> Burger Boys · 32 Church Lane, Melbourne CBD · Inside Saving Grace</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile nav
+  const navToggle = document.getElementById('navToggle');
+  navToggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
+  // menu tabs
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected','false'));
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, {threshold:0.15});
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('show'));
+  }
+
+  // close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.body.classList.remove('nav-open'));
+  });
+</script>
+
+</body>
+</html>
